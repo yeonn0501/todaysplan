@@ -18,12 +18,14 @@
 
 <!-- Tempus Dominus Styles -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.2.10/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="/asset/css/reset.css">
 </head>
 <body>
   <!-- 네비게이션바 -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/index.html">오플!</a>
+      <a class="navbar-brand text-primary" href="/index.html">
+        <img src="/asset/img/calendar.png" alt="" width="24" class="d-inline-block align-text-top">&nbsp;오플!</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -51,49 +53,51 @@
       </div>
     </div>
   </nav>
-  <div class="container">
-    <form class="row g-3 mt-5">
-      <div class="col-md-6">
-        <label for="title" class="form-label">할 일</label>
-        <input type="text" class="form-control" id="title">
+  <div class="container-sm">
+    <form class="row g-4 mt-5">
+      <div class="col-md-3">
+        <label for="inputState" class="form-label"><span class="text-danger">*</span>&nbsp;카테고리</label>
+        <select id="inputState" class="form-select" name="category" required>
+          <option value="0">개인 프로젝트</option>
+          <option value="1">공부</option>
+          <option value="2">회사 프로젝트</option>
+          <option value="3">기타</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="title" class="form-label"><span class="text-danger">*</span>&nbsp;할 일</label>
+        <input type="text" class="form-control" id="title" name="title" required>
       </div>
       <div class="col-md-6">
         <label for="desc" class="form-label">설명</label>
-        <input type="text" class="form-control" id="desc">
+        <input type="text" class="form-control" id="desc" name="desc">
       </div>
-      <div class="col-12">
-        <label for="inputAddress" class="form-label">언제부터</label>
+      <div class="col-xs-6 col-md-3">
+        <label for="inputAddress" class="form-label">시작일</label>
         <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
       </div>
-      <div class="col-12">
-        <label for="inputAddress2" class="form-label">Address 2</label>
+      <div class="col-xs-6 col-md-3">
+        <label for="inputAddress" class="form-label">시간</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <label for="inputAddress" class="form-label">마감일</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <label for="inputAddress2" class="form-label">시간</label>
         <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
       </div>
-      <div class="col-md-6">
-        <label for="inputCity" class="form-label">City</label>
-        <input type="text" class="form-control" id="inputCity">
-      </div>
-      <div class="col-md-4">
-        <label for="inputState" class="form-label">State</label>
-        <select id="inputState" class="form-select">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="col-md-2">
-        <label for="inputZip" class="form-label">Zip</label>
-        <input type="text" class="form-control" id="inputZip">
-      </div>
-      <div class="col-12">
+      <div class="col-md-12">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="gridCheck">
           <label class="form-check-label" for="gridCheck">
-            Check me out
+            완료됨
           </label>
         </div>
       </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Sign in</button>
+      <div class="col-12 d-grid gap-2">
+        <button type="submit" class="btn btn-primary">등록</button>
       </div>
     </form>
   </div>
