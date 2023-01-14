@@ -11,7 +11,7 @@ body {
 
 
 .todo-item:hover {
-  border-color: #0d6dfe98;
+  border-color: #0d6dfe;
   transition: all ease-in-out .2s;
 }
 
