@@ -22,7 +22,8 @@ let item = document.querySelector(".todo-item");
 title.focus();
 
 // 시간 입력시 숫자 4자리 세미콜로 삽입
-function onKeyupTime() {
+
+function onFocusOut() {
   time = this.value;
   replaceTime = time.replace(/\:/g, "");
   // if(replaceTime.length >= 4 && replaceTime.length < 5) {
@@ -31,19 +32,19 @@ function onKeyupTime() {
     if(replaceTime.length == 2 && replaceTime < 25){
       this.value = replaceTime + ":00";
     }
-    // if(hours + minutes > 2400) {
-    //   alert("시간은 24시를 넘길 수 없습니다.");
-    //   time = "24:00"
-    //   return false;
-    // }
-    // if(minutes > 60) {
-    //   alert("분은 60분을 넘길 수 없습니다.")
-    //   time = hours + ":00";
-    //   return false;
-    // }
-    //time = hours + ":" + minutes;
+    if(hours + minutes > 2400) {
+      alert("시간은 24시를 넘길 수 없습니다.");
+      time = "24:00"
+      return false;
+    }
+    if(minutes > 60) {
+      alert("분은 60분을 넘길 수 없습니다.")
+      time = hours + ":00";
+      return false;
+    }
+    time = hours + ":" + minutes;
     console.log(time);
-    //this.value = time;
+    this.value = time;
   }
 
 // 유효성 검사
@@ -83,5 +84,5 @@ function onDoubleClick() {
 
 insertBtn.addEventListener("click", handleTodoSubmit);
 item.addEventListener("dblclick", onDoubleClick);
-startTime.addEventListener("keyup", onKeyupTime);
-endTime.addEventListener("keyup", onKeyupTime);
+startTime.addEventListener("focusout", onFocusOut);
+endTime.addEventListener("focusout", onFocusOut);
