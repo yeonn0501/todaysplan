@@ -28,34 +28,34 @@ function onFocusOut() {
   
   if (replaceTime.length == 2 && replaceTime < 25){
     this.value = replaceTime + ":00";
-  } else if (replaceTime.length == 2 && replaceTime > 25) {
+  } else if (replaceTime.length == 2 && replaceTime > 24) {
     alert("시간은 24시를 넘길 수 없습니다.");
     this.focus();
-    this.value = "24:00";
+    this.value = "";
     return false;
   }
   if(replaceTime.length == 5 ) {
     replaceTime = replaceTime.substring(0, 4);
     this.value = replaceTime;
   }
-  if (replaceTime.length >= 4 && replaceTime.length < 5) {
+  if (replaceTime.length >= 4 ) {
     hours = replaceTime.substring(0,2);
     minutes = replaceTime.substring(2,4);
     if(hours + minutes > 2400) {
       alert("시간은 24시를 넘길 수 없습니다.");
-      this.value = "24:00";
+      this.value = "";
       this.focus();
       return false;
     }
-  
     if (minutes > 60) {
       alert("분은 60분을 넘길 수 없습니다.")
-      time = hours + ":00";
+      this.value = hours + ":";
       this.focus();
       return false;
+    } else {
+      time = hours + ":" + minutes;
+      this.value = time;
     }
-    time = hours + ":" + minutes;
-    this.value = time;
   }
   
 }
