@@ -44,3 +44,8 @@ footer {
 .todo-item > .card-body {
   font-family: 'AppleSDGothicNeoM';
 }
+
+.time:invalid {
+  border: 1px solid red;
+}
+
