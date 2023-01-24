@@ -14,20 +14,18 @@ footer {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 100%;  
-  height: 60px; 
+  width: 100%;
   padding: 10px 0;
-  color: #fff;
   text-align: center;
 }
 
 #wrapper {
   width: 100%;
   min-height: 100%;
-  margin-bottom: 0px;
+  margin-bottom: 100px;
 }
 
-.todo-item:hover {
+.card:hover {
   border-color: #0d6dfe;
   transition: all ease-in-out .2s;
 }
@@ -37,15 +35,7 @@ footer {
   transition: all ease-in-out .2s;
 }
 
-.todo-item > .card-header {
-  color: #fff;
-}
 
-.todo-item > .card-body {
+.card-body {
   font-family: 'AppleSDGothicNeoM';
 }
-
-.time:invalid {
-  border: 1px solid red;
-}
-
