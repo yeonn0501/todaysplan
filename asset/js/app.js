@@ -37,12 +37,14 @@ function onFocusOut() {
   // 두자리수만 입력, 25보다 작을때 HH:00 으로 표시
 
   if (replaceTime.length < 2 && replaceTime.length > 0) {
-    alert("2자리 또는 4자리를 입력하세요.");
-    this.focus();
     this.value = "0" + this.value + ":00";
-    this.select(1, 2);
+  }
+  if (replaceTime.length == 3) {
+    alert("3자리 입력은 불가능합니다.");
+    this.focus();
     return false;
   }
+
   if (replaceTime.length == 2 && replaceTime < 25) {
     this.value = replaceTime + ":00";
 
@@ -97,9 +99,8 @@ function paintTodo(newTodoObj) {
   let item = todoItem.cloneNode(true);
   item.id = newTodoObj.id;
   item.classList.remove('d-none');
-  row.prepend(item);
+  row.appendChild(item);
   item.addEventListener("dblclick", onDoubleClick);
-
 }
 
 // 할 일 등록시 유효성 검사, 입력란 비우고 화면에 그린뒤 저장
@@ -113,12 +114,13 @@ function handleTodoSubmit(event) {
     const newStart = startTime.value;
     const newEnd = endTime.value;
     const nowDate = Date.now();
-    const date = new Date(nowDate);
+    const reportingDate = new Date(nowDate);
     const newTodoObj = {
       category: newCategory,
       title: newTitle,
       id: nowDate,
-      write: date,
+      status: Status,
+      date: dateCreated,
       desc: newDesc,
       start: newStart,
       end: newEnd
@@ -133,7 +135,8 @@ function saveTodos() {
 }
 
 
-// 한번 클릭시 수정
+// card-header 클릭시 완료
+
 
 
 // 두번 클릭시 할 일 완료 및 미완료 처리
@@ -142,16 +145,16 @@ function onDoubleClick() {
 }
 
 
-// 길게 클릭시 휴지통 아이콘 생성
 
-// 휴지통 아이콘으로 이동시 삭제
 
-// const savedTodos = localStorage.getItem(TODOS_KEY);
-// if (savedToDos !== null) {
-//   const parsedToDos = JSON.parse(savedToDos);
-//   toDos = parsedToDos;
-//   parsedToDos.forEach(paintTodo);
-// }
+
+// 로컬스토리지에 저장된 할일을 가져와서 보이기
+const savedTodos = localStorage.getItem(TODOS_KEY);
+if (savedTodos !== null) {
+  const parsedToDos = JSON.parse(savedTodos);
+  toDos = parsedToDos;
+  parsedToDos.forEach(paintTodo);
+}
 
 items.addEventListener("dblclick", onDoubleClick);
 startTime.addEventListener("focusout", onFocusOut);
