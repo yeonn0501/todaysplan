@@ -15,6 +15,7 @@ const todoItem = document.getElementById("todoItem");
 const row = document.getElementById("Row");
 let validate = false;
 let items = document.querySelector(".todo-item");
+
 const todoTitle = document.getElementById("todoTitle");
 const todoDesc = document.getElementById("todoDesc");
 const TODOS_KEY = "todos";
@@ -101,6 +102,8 @@ function paintTodo(newTodoObj) {
   item.classList.remove('d-none');
   row.appendChild(item);
   item.addEventListener("dblclick", onDoubleClick);
+  
+  //chkbox.addEventListener("change", onChangeCheckBox);
 }
 
 // 할 일 등록시 유효성 검사, 입력란 비우고 화면에 그린뒤 저장
@@ -114,7 +117,8 @@ function handleTodoSubmit(event) {
     const newStart = startTime.value;
     const newEnd = endTime.value;
     const nowDate = Date.now();
-    const reportingDate = new Date(nowDate);
+    const dateCreated = new Date(nowDate);
+    const Status = false;
     const newTodoObj = {
       category: newCategory,
       title: newTitle,
@@ -135,7 +139,14 @@ function saveTodos() {
 }
 
 
-// card-header 클릭시 완료
+// 체크버튼 클릭시 status true로 변경 후 달성 완료 처리
+function onChangeCheckBox() {
+  if (this.checked) {
+    console.log('체크')
+  } else {
+    console.log('체크안됨')
+  }
+}
 
 
 
@@ -156,7 +167,7 @@ if (savedTodos !== null) {
   parsedToDos.forEach(paintTodo);
 }
 
-items.addEventListener("dblclick", onDoubleClick);
+// items.addEventListener("dblclick", onDoubleClick);
 startTime.addEventListener("focusout", onFocusOut);
 endTime.addEventListener("focusout", onFocusOut);
-todoForm.addEventListener("submit", handleTodoSubmit)
+todoForm.addEventListener("submit", handleTodoSubmit);
