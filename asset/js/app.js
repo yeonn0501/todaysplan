@@ -102,8 +102,9 @@ function paintTodo(newTodoObj) {
   item.classList.remove('d-none');
   row.appendChild(item);
   item.addEventListener("dblclick", onDoubleClick);
-  
-  //chkbox.addEventListener("change", onChangeCheckBox);
+  let chkbox = item.childNodes[1].childNodes[1].children[1].childNodes[1];
+  console.log(chkbox);
+  chkbox.addEventListener("change", onChangeCheckBox);
 }
 
 // 할 일 등록시 유효성 검사, 입력란 비우고 화면에 그린뒤 저장
@@ -143,6 +144,7 @@ function saveTodos() {
 function onChangeCheckBox() {
   if (this.checked) {
     console.log('체크')
+    console.log(this.parentNode.parentNode.parentNode.parentNode.id);
   } else {
     console.log('체크안됨')
   }
