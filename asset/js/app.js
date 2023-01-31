@@ -10,7 +10,9 @@ const desc = document.getElementById("Desc");
 const startTime = document.getElementById("startTime");
 const endTime = document.getElementById("endTime");
 const insertBtn = document.getElementById("insertBtn");
+const clearBtn = document.getElementById("clearBtn");
 const todoForm = document.getElementById("todoForm");
+
 const todoItem = document.getElementById("todoItem");
 const row = document.getElementById("Row");
 let validate = false;
@@ -138,6 +140,14 @@ function saveTodos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
+function clearFormInput() {
+  console.log("clearFormInput")
+  let formInput = document.getElementsByClassName("form-control");
+  console.log(formInput);
+  for (let i; i < formInput.length; i++) {
+    formInput[i].value = "";
+  }
+}
 
 // 체크버튼 클릭시 status true로 변경 후 달성 완료 처리
 function onChangeCheckBox() {
@@ -152,7 +162,7 @@ function onChangeCheckBox() {
 
 // 두번 클릭시 할 일 완료 및 미완료 처리
 function onDoubleClick() {
-  console.log("test")
+  
 }
 
 
@@ -171,3 +181,4 @@ if (savedTodos !== null) {
 startTime.addEventListener("focusout", onFocusOut);
 endTime.addEventListener("focusout", onFocusOut);
 todoForm.addEventListener("submit", handleTodoSubmit);
+clearBtn.addEventListener("click", clearFormInput);
