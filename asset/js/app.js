@@ -22,13 +22,14 @@ const todoTitle = document.getElementById("todoTitle");
 const todoDesc = document.getElementById("todoDesc");
 const TODOS_KEY = "todos";
 let toDos = [];
+let toDosDone = [];
 let start;
 let end;
 let time;
 let replaceTime;
 let hours;
 let minutes;
-
+let checkedId;
 title.focus();
 
 // 시간 입력시 유효성 검사 및 세미콜론 추가
@@ -100,7 +101,7 @@ function paintTodo(newTodoObj) {
   todoTitle.innerHTML = newTodoObj.title;
   todoDesc.innerHTML = newTodoObj.desc;
   let item = todoItem.cloneNode(true);
-  item.lastChild.id = newTodoObj.id;
+  item.id = newTodoObj.id;
   item.classList.remove('d-none');
   row.appendChild(item);
   item.addEventListener("dblclick", onDoubleClick);
@@ -135,6 +136,7 @@ function handleTodoSubmit(event) {
     paintTodo(newTodoObj);
     saveTodos();
     clearFormInput();
+    title.focus();
   }
 }
 function saveTodos() {
@@ -142,7 +144,6 @@ function saveTodos() {
 }
 
 function clearFormInput() {
-  console.log('취소 버튼 클릭')
   let formInput = document.getElementsByClassName("form-control");
   for (let i=0; i < formInput.length; i++) {
     formInput[i].value = "";
@@ -150,11 +151,14 @@ function clearFormInput() {
 }
 
 // 체크버튼 클릭시 status true로 변경 후 달성 완료 처리
-function onChangeCheckBox() {
+function onChangeCheckBox(event) {
   if (this.checked) {
     console.log('체크')
-    //console.log(this.parentNode.parentNode.parentNode.parentNode.id);
-    console.log(this.parentElement.parentElement);
+    const card = this.parentNode.parentNode.parentNode.parentNode;
+    checkedId = card.id;
+    toDos = toDos.filter(toDo => toDo.id !== parseInt(card.id))
+    card.remove();
+    saveTodos();
   } else {
     console.log('체크안됨')
   }
