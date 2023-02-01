@@ -100,12 +100,11 @@ function paintTodo(newTodoObj) {
   todoTitle.innerHTML = newTodoObj.title;
   todoDesc.innerHTML = newTodoObj.desc;
   let item = todoItem.cloneNode(true);
-  item.id = newTodoObj.id;
+  item.lastChild.id = newTodoObj.id;
   item.classList.remove('d-none');
   row.appendChild(item);
   item.addEventListener("dblclick", onDoubleClick);
   let chkbox = item.childNodes[1].childNodes[1].children[1].childNodes[1];
-  console.log(chkbox);
   chkbox.addEventListener("change", onChangeCheckBox);
 }
 
@@ -135,6 +134,7 @@ function handleTodoSubmit(event) {
     toDos.push(newTodoObj);
     paintTodo(newTodoObj);
     saveTodos();
+    clearFormInput();
   }
 }
 function saveTodos() {
@@ -142,10 +142,9 @@ function saveTodos() {
 }
 
 function clearFormInput() {
-  console.log("clearFormInput")
+  console.log('취소 버튼 클릭')
   let formInput = document.getElementsByClassName("form-control");
-  console.log(formInput);
-  for (let i; i < formInput.length; i++) {
+  for (let i=0; i < formInput.length; i++) {
     formInput[i].value = "";
   }
 }
@@ -154,7 +153,8 @@ function clearFormInput() {
 function onChangeCheckBox() {
   if (this.checked) {
     console.log('체크')
-    console.log(this.parentNode.parentNode.parentNode.parentNode.id);
+    //console.log(this.parentNode.parentNode.parentNode.parentNode.id);
+    console.log(this.parentElement.parentElement);
   } else {
     console.log('체크안됨')
   }
