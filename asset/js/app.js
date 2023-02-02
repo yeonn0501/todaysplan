@@ -16,7 +16,7 @@ const todoForm = document.getElementById("todoForm");
 const todoItem = document.getElementById("todoItem");
 const row = document.getElementById("Row");
 let validate = false;
-let items = document.querySelector(".todo-item");
+
 
 const todoTitle = document.getElementById("todoTitle");
 const todoDesc = document.getElementById("todoDesc");
@@ -107,8 +107,8 @@ function paintTodo(newTodoObj) {
   item.addEventListener("dblclick", onDoubleClick);
   let chkbox = item.childNodes[1].childNodes[1].children[1].childNodes[1];
   chkbox.addEventListener("change", onChangeCheckBox);
-}
 
+  }
 // 할 일 등록시 유효성 검사, 입력란 비우고 화면에 그린뒤 저장
 function handleTodoSubmit(event) {
   event.preventDefault();
@@ -152,13 +152,22 @@ function clearFormInput() {
 
 // 체크버튼 클릭시 status true로 변경 후 달성 완료 처리
 function onChangeCheckBox(event) {
+  let cardIndex;
   if (this.checked) {
-    console.log('체크')
+    
     const card = this.parentNode.parentNode.parentNode.parentNode;
     checkedId = card.id;
-    toDos = toDos.filter(toDo => toDo.id !== parseInt(card.id))
-    card.remove();
-    saveTodos();
+    // toDos = toDos.filter(
+    //   toDo => {
+    //     toDo.id !== parseInt(card.id);
+    //   })
+    // card.remove();
+    // saveTodos();
+    const getData = JSON.parse(localStorage.getItem('todos'));
+    console.log(getData[0].id)
+    if (getData[0].id == checkedId) {
+        console.log('ddd')
+    }
   } else {
     console.log('체크안됨')
   }
@@ -171,7 +180,9 @@ function onDoubleClick() {
   
 }
 
-
+function findIndex(event) {
+  console.log('카드클릭');
+}
 
 
 
