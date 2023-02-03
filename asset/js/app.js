@@ -21,6 +21,7 @@ let validate = false;
 const todoTitle = document.getElementById("todoTitle");
 const todoDesc = document.getElementById("todoDesc");
 const TODOS_KEY = "todos";
+const TODOS_DONE_KEY = "todosDone";
 let toDos = [];
 let toDosDone = [];
 let start;
@@ -107,7 +108,8 @@ function paintTodo(newTodoObj) {
   item.addEventListener("dblclick", onDoubleClick);
   let chkbox = item.childNodes[1].childNodes[1].children[1].childNodes[1];
   chkbox.addEventListener("change", onChangeCheckBox);
-
+  
+  
   }
 // 할 일 등록시 유효성 검사, 입력란 비우고 화면에 그린뒤 저장
 function handleTodoSubmit(event) {
@@ -143,6 +145,9 @@ function saveTodos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
+function saveTodosDone() {
+  localStorage.setItem(TODOS_DONE_KEY, JSON.stringify(toDosDone));
+}
 function clearFormInput() {
   let formInput = document.getElementsByClassName("form-control");
   for (let i=0; i < formInput.length; i++) {
@@ -152,24 +157,17 @@ function clearFormInput() {
 
 // 체크버튼 클릭시 status true로 변경 후 달성 완료 처리
 function onChangeCheckBox(event) {
-  let cardIndex;
+  const card = this.parentNode.parentNode.parentNode.parentNode;
+  checkedId = card.id;
   if (this.checked) {
-    
-    const card = this.parentNode.parentNode.parentNode.parentNode;
-    checkedId = card.id;
-    // toDos = toDos.filter(
-    //   toDo => {
-    //     toDo.id !== parseInt(card.id);
-    //   })
-    // card.remove();
-    // saveTodos();
-    const getData = JSON.parse(localStorage.getItem('todos'));
-    console.log(getData[0].id)
-    if (getData[0].id == checkedId) {
-        console.log('ddd')
-    }
+    console.log(checkedId)
+    //toDosDone = toDosDone.setItem()
+    toDos = toDos.filter(toDo =>  toDo.id !== parseInt(card.id))
+    card.remove();
+    saveTodos();
   } else {
-    console.log('체크안됨')
+    console.log(checkedId)
+    console.log('none')
   }
 }
 
@@ -180,8 +178,9 @@ function onDoubleClick() {
   
 }
 
-function findIndex(event) {
+function findId(event) {
   console.log('카드클릭');
+  
 }
 
 
