@@ -35,37 +35,33 @@ title.focus();
 
 // 시간 입력시 유효성 검사 및 세미콜론 추가
 function onFocusOut() {
-  time = this.value;
-  // 세미콜론이 들어가면 제외한다.
-  replaceTime = time.replace(/\:/g, "");
+  time = this.value.replace(/\:/g, "");
 
   // 두자리수만 입력, 25보다 작을때 HH:00 으로 표시
-
-  if (replaceTime.length < 2 && replaceTime.length > 0) {
+  if (time.length < 2 && time.length > 0) {
     this.value = "0" + this.value + ":00";
-  }
-  if (replaceTime.length == 3) {
+
+  } else if (time.length == 3) {
     alert("3자리 입력은 불가능합니다.");
     this.focus();
     return false;
-  }
 
-  if (replaceTime.length == 2 && replaceTime < 25) {
+  } else if (time.length === 2 && time < 25) {
     this.value = replaceTime + ":00";
 
-  } else if (replaceTime.length == 2 && replaceTime > 24) {
+  } else if (time.length === 2 && time > 24) {
     alert("시간은 24시를 넘길 수 없습니다.");
     this.focus();
     this.value = "";
     return false;
 
-  } else if (replaceTime.length >= 4) {
-    if (replaceTime.length == 5) {
-      replaceTime = replaceTime.substring(0, 4);
-      this.value = replaceTime;
+  } else if (time.length >= 4) {
+    if (time.length == 5) {
+      time = time.substring(0, 4);
+      this.value = time;
     }
-    hours = replaceTime.substring(0, 2);
-    minutes = replaceTime.substring(2, 4);
+    hours = time.substring(0, 2);
+    minutes = time.substring(2, 4);
 
     if (hours + minutes > 2400) {
       alert("시간은 24시를 넘길 수 없습니다.");
@@ -79,8 +75,7 @@ function onFocusOut() {
       return false;
 
     } else {
-      time = hours + ":" + minutes;
-      this.value = time;
+      this.value = `${hours}:${minutes}`;
     }
   }
 }
@@ -108,9 +103,12 @@ function paintTodo(newTodoObj) {
   item.addEventListener("dblclick", onDoubleClick);
   let chkbox = item.childNodes[1].childNodes[1].children[1].childNodes[1];
   chkbox.addEventListener("change", onChangeCheckBox);
-  
-  
   }
+
+// 화면에 todoDone item 그리기
+function paintTodoDone() {
+  
+}
 // 할 일 등록시 유효성 검사, 입력란 비우고 화면에 그린뒤 저장
 function handleTodoSubmit(event) {
   event.preventDefault();
@@ -141,6 +139,11 @@ function handleTodoSubmit(event) {
     title.focus();
   }
 }
+
+function deleteToDo() {
+  toDos = toDos.filter(toDo =>  toDo.id !== parseInt(card.id))
+}
+
 function saveTodos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
@@ -148,6 +151,7 @@ function saveTodos() {
 function saveTodosDone() {
   localStorage.setItem(TODOS_DONE_KEY, JSON.stringify(toDosDone));
 }
+
 function clearFormInput() {
   let formInput = document.getElementsByClassName("form-control");
   for (let i=0; i < formInput.length; i++) {
@@ -160,14 +164,17 @@ function onChangeCheckBox(event) {
   const card = this.parentNode.parentNode.parentNode.parentNode;
   checkedId = card.id;
   if (this.checked) {
-    console.log(checkedId)
-    //toDosDone = toDosDone.setItem()
-    toDos = toDos.filter(toDo =>  toDo.id !== parseInt(card.id))
+    // 체크상태일때 toDos 에서 그 객체만을 뽑아내어 toDosDone 에 push 후 localStorage에 저장한다.
+    let arr = JSON.parse(localStorage.getItem(TODOS_KEY));
+    let toDoDone = arr.filter(toDo => toDo.id == parseInt(card.id));
+    toDoDone = {...toDoDone[0]}
+    toDos = arr.filter(toDo => toDo.id !== parseInt(card.id));
     card.remove();
+    toDosDone.push(toDoDone);
+    saveTodosDone();
     saveTodos();
   } else {
-    console.log(checkedId)
-    console.log('none')
+
   }
 }
 
@@ -192,6 +199,15 @@ if (savedTodos !== null) {
   toDos = parsedToDos;
   parsedToDos.forEach(paintTodo);
 }
+
+const savedTodosDone = localStorage.getItem(TODOS_DONE_KEY);
+if(savedTodosDone !== null) {
+  const parsedToDosDone = JSON.parse(savedTodosDone);
+  toDosDone = parsedToDosDone;
+  //parsedToDosDone.forEach(paintTodoDone);
+}
+
+
 
 // items.addEventListener("dblclick", onDoubleClick);
 startTime.addEventListener("focusout", onFocusOut);
