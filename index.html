@@ -71,16 +71,16 @@
         <input type="text" class="form-control bg-dark" id="Desc" name="desc" maxlength="100" placeholder="100자 이내">
       </div>
       <div class="col-sm-6 col-md-6 col-lg-1">
-        <label for="startTime" class="form-label datetime">시작</label>
-        <input type="text" class="form-control bg-dark time" id="startTime" minlength="2" maxlength="5" placeholder="2또는4자리">
+        <label for="startTime" class="form-label datetime">시작 시간</label>
+        <input type="text" class="form-control bg-dark time" id="startTime" maxlength="5" onkeyup="enterkey()" placeholder="2또는4자리">
       </div>
       <div class="col-sm-6 col-md-6 col-lg-1">
-        <label for="endTime" class="form-label datetime">완료</label>
-        <input type="text" class="form-control bg-dark time" id="endTime" minlength="2" maxlength="5" placeholder="2또는4자리">
+        <label for="endTime" class="form-label datetime">완료 시간</label>
+        <input type="text" class="form-control bg-dark time" id="endTime" maxlength="5" onkeyup="enterkey()" placeholder="2또는4자리">
       </div>
 
       <div class="col-lg-1 d-grid gap-2">
-        <input type="submit" class="btn btn-primary" id="insertBtn" value="저장" name="insertBtn" />
+        <input type="submit" class="btn btn-primary" id="insertBtn" value="등록" name="insertBtn" />
       </div>
       <div class="col-lg-1 d-grid gap-2">
         <input type="button" class="btn btn-secondary" id="clearBtn" value="취소" name="clearBtn" />

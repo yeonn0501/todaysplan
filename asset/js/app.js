@@ -35,33 +35,36 @@ title.focus();
 
 // 시간 입력시 유효성 검사 및 세미콜론 추가
 function onFocusOut() {
-  time = this.value.replace(/\:/g, "");
+  time = this.value;
+  // 세미콜론이 들어가면 제외한다.
+  replaceTime = time.replace(/\:/g, "");
 
   // 두자리수만 입력, 25보다 작을때 HH:00 으로 표시
-  if (time.length < 2 && time.length > 0) {
+  if (replaceTime.length < 2 && replaceTime.length > 0) {
     this.value = "0" + this.value + ":00";
 
-  } else if (time.length == 3) {
-    alert("3자리 입력은 불가능합니다.");
+  } else if (replaceTime.length == 3) {
+    
+    this.value = '';
     this.focus();
     return false;
 
-  } else if (time.length === 2 && time < 25) {
+  } else if(replaceTime.length === 2 && replaceTime < 25) {
     this.value = replaceTime + ":00";
 
-  } else if (time.length === 2 && time > 24) {
+  } else if (replaceTime.length === 2 && replaceTime > 24) {
     alert("시간은 24시를 넘길 수 없습니다.");
     this.focus();
     this.value = "";
     return false;
 
-  } else if (time.length >= 4) {
-    if (time.length == 5) {
-      time = time.substring(0, 4);
-      this.value = time;
+  } else if (replaceTime.length >= 4) {
+    if (replaceTime.length == 5) {
+      replaceTime = replaceTime.substring(0, 4);
+      this.value = replaceTime;
     }
-    hours = time.substring(0, 2);
-    minutes = time.substring(2, 4);
+    hours = replaceTime.substring(0, 2);
+    minutes = replaceTime.substring(2, 4);
 
     if (hours + minutes > 2400) {
       alert("시간은 24시를 넘길 수 없습니다.");
@@ -84,6 +87,7 @@ function onFocusOut() {
 function ValidateTodo() {
   let blank_pattern = /^\s+|\s+$/g;
   if (title.value.replace(blank_pattern, '') == '') {
+    title.value = '';
     title.focus();
     validate = false;
     return false;
@@ -210,7 +214,7 @@ if(savedTodosDone !== null) {
 
 
 // items.addEventListener("dblclick", onDoubleClick);
-startTime.addEventListener("focusout", onFocusOut);
+startTime.addEventListener("blur", onFocusOut);
 endTime.addEventListener("focusout", onFocusOut);
 todoForm.addEventListener("submit", handleTodoSubmit);
 clearBtn.addEventListener("click", clearFormInput);
