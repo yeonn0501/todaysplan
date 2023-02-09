@@ -29,13 +29,13 @@ function validateTime(e) {
   return true;
 }
 
-function submitTextarea(event) {
-    let key = event.key || event.keyCode;
+// function submitTextarea(event) {
+//     let key = event.key || event.keyCode;
 
-    if (key === 'Enter' || key === 13) {
-        alert('전송');
-    }
-}
+//     if (key === 'Enter' || key === 13) {
+//         alert('전송');
+//     }
+// }
 
-let textarea = document.getElementById('my-textarea');
-textarea.addEventListener('keyup', event => submitTextarea(event));
+// let textarea = document.getElementById('my-textarea');
+// textarea.addEventListener('keyup', event => submitTextarea(event));
