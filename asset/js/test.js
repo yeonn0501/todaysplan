@@ -27,6 +27,7 @@ function validateTime(e) {
   }
   e.target.value = input;
   return true;
+  
 }
 
 // function submitTextarea(event) {

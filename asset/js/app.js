@@ -3,7 +3,7 @@
 // 입력 폼 유효성 검사
 // 1. 기간 선택시 첫번째 기간 < 두번째 기간
 // 2. 등록시 객체에 id값 생성 후 저장 (0부터 시작)
-
+// test
 const category = document.getElementById("Category");
 const title = document.getElementById("Title");
 const desc = document.getElementById("Desc");
