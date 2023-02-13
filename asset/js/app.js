@@ -12,6 +12,8 @@ const endTime = document.getElementById("endTime");
 const insertBtn = document.getElementById("insertBtn");
 const clearBtn = document.getElementById("clearBtn");
 const todoForm = document.getElementById("todoForm");
+const spanSumTodos = document.getElementById("spanSumTodos");
+const spanSumDone = document.getElementById("spanSumDone");
 
 const todoItem = document.getElementById("todoItem");
 const row = document.getElementById("Row");
@@ -44,12 +46,12 @@ function onFocusOut() {
     this.value = "0" + this.value + ":00";
 
   } else if (replaceTime.length == 3) {
-    
+
     this.value = '';
     this.focus();
     return false;
 
-  } else if(replaceTime.length === 2 && replaceTime < 25) {
+  } else if (replaceTime.length === 2 && replaceTime < 25) {
     this.value = replaceTime + ":00";
 
   } else if (replaceTime.length === 2 && replaceTime > 24) {
@@ -107,11 +109,11 @@ function paintTodo(newTodoObj) {
   item.addEventListener("dblclick", onDoubleClick);
   let chkbox = item.childNodes[1].childNodes[1].children[1].childNodes[1];
   chkbox.addEventListener("change", onChangeCheckBox);
-  }
+}
 
 // 화면에 todoDone item 그리기
 function paintTodoDone() {
-  
+
 }
 // 할 일 등록시 유효성 검사, 입력란 비우고 화면에 그린뒤 저장
 function handleTodoSubmit(event) {
@@ -145,11 +147,20 @@ function handleTodoSubmit(event) {
 }
 
 function deleteToDo() {
-  toDos = toDos.filter(toDo =>  toDo.id !== parseInt(card.id))
+  toDos = toDos.filter(toDo => toDo.id !== parseInt(card.id))
 }
 
 function saveTodos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
+  changeSumNumber();
+
+}
+
+// 할 일 추가하거나 상태 변경시 합계 숫자 변경
+function changeSumNumber() {
+  let sumTodos = JSON.parse(localStorage.getItem("todos")).length;
+  spanSumTodos.innerHTML = sumTodos;
+  console.log(sumTodos)
 }
 
 function saveTodosDone() {
@@ -158,7 +169,7 @@ function saveTodosDone() {
 
 function clearFormInput() {
   let formInput = document.getElementsByClassName("form-control");
-  for (let i=0; i < formInput.length; i++) {
+  for (let i = 0; i < formInput.length; i++) {
     formInput[i].value = "";
   }
 }
@@ -171,12 +182,15 @@ function onChangeCheckBox(event) {
     // 체크상태일때 toDos 에서 그 객체만을 뽑아내어 toDosDone 에 push 후 localStorage에 저장한다.
     let arr = JSON.parse(localStorage.getItem(TODOS_KEY));
     let toDoDone = arr.filter(toDo => toDo.id == parseInt(card.id));
-    toDoDone = {...toDoDone[0]}
+    toDoDone[0].status = true;
+    toDoDone = { ...toDoDone[0] }
     toDos = arr.filter(toDo => toDo.id !== parseInt(card.id));
     card.remove();
     toDosDone.push(toDoDone);
+    toDos.push(toDoDone);
     saveTodosDone();
     saveTodos();
+    //paintTodo();
   } else {
 
   }
@@ -186,12 +200,12 @@ function onChangeCheckBox(event) {
 
 // 두번 클릭시 할 일 완료 및 미완료 처리
 function onDoubleClick() {
-  
+
 }
 
 function findId(event) {
   console.log('카드클릭');
-  
+
 }
 
 
@@ -205,7 +219,7 @@ if (savedTodos !== null) {
 }
 
 const savedTodosDone = localStorage.getItem(TODOS_DONE_KEY);
-if(savedTodosDone !== null) {
+if (savedTodosDone !== null) {
   const parsedToDosDone = JSON.parse(savedTodosDone);
   toDosDone = parsedToDosDone;
   //parsedToDosDone.forEach(paintTodoDone);

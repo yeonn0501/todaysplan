@@ -7,8 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> 오플! 오늘의 플랜 - Today's Plans </title>
   <!-- 부트스트랩5 CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/asset/css/style.css">
   <link rel="stylesheet" href="/asset/css/reset.css">
   <link rel="shortcut Icon" href="/asset/img/calendar.png">
@@ -65,7 +67,8 @@
         </div>
         <div class="col-sm-8 col-md-4 col-lg-2">
           <label for="Title" class="form-label"><span class="text-danger">*</span>&nbsp;할 일</label>
-          <input type="text" class="form-control bg-dark" id="Title" name="title" minlength="1" maxlength="30" placeholder="30자 이내">
+          <input type="text" class="form-control bg-dark" id="Title" name="title" minlength="1" maxlength="30"
+            placeholder="30자 이내">
         </div>
         <div class="col-md-6 col-lg-4">
           <label for="Desc" class="form-label">설명</label>
@@ -73,13 +76,13 @@
         </div>
         <div class="col-6 col-sm-6 col-md-6 col-lg-1">
           <label for="startTime" class="form-label datetime">시작 시간</label>
-          <input type="text" class="form-control bg-dark time" id="startTime" maxlength="5" onkeyup="enterkey()" placeholder="2또는4자리">
+          <input type="text" class="form-control bg-dark time" id="startTime" maxlength="5" placeholder="2또는4자리">
         </div>
         <div class="col-6 col-sm-6 col-md-6 col-lg-1">
           <label for="endTime" class="form-label datetime">완료 시간</label>
-          <input type="text" class="form-control bg-dark time" id="endTime" maxlength="5" onkeyup="enterkey()" placeholder="2또는4자리">
+          <input type="text" class="form-control bg-dark time" id="endTime" maxlength="5" placeholder="2또는4자리">
         </div>
-        
+
         <div class="col-lg-1 d-grid gap-2">
           <input type="submit" class="btn btn-primary" id="insertBtn" value="등록" name="insertBtn" />
         </div>
@@ -90,17 +93,22 @@
     </div>
     <div class="row g-4 mt-1" id="Row">
       <div class="text-center">
-        <button type="button" class="btn btn-dark col-12 " id="toggleBtn"
-        data-bs-toggle="collapse"
-        data-bs-target="#formWrap"
-        aria-expanded="true"
-        aria-controls="formWrap"
-        ><i id="arrowIcon" class="text-white bi bi-chevron-up"></i></button>
+        <button type="button" class="btn btn-dark col-12 " id="toggleBtn" data-bs-toggle="collapse" data-bs-target="#formWrap"
+          aria-expanded="true" aria-controls="formWrap"><i id="arrowIcon" class="text-white bi bi-chevron-up"></i></button>
+        <div class="text-end mt-2">
+          <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck2">진행중(<span id="spanSumTodos"></span>)</label>
+
+            <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck3">완료(<span id="spanSumDone"></span>)</label>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div id="todoItem" class="d-none todo-item col-12 col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-4">
-    <div class="card mt-4">
+    <div class="card">
       <div class="card-header todo-item-title">
         <div id="todoTitle" class="d-inline float-left align-middle">
         </div>
