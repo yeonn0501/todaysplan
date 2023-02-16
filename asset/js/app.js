@@ -33,7 +33,10 @@ let replaceTime;
 let hours;
 let minutes;
 let checkedId;
+let sumTodos;
+let sumTodosDone;
 title.focus();
+changeSumNumber();
 
 // 시간 입력시 유효성 검사 및 세미콜론 추가
 function onFocusOut() {
@@ -158,9 +161,19 @@ function saveTodos() {
 
 // 할 일 추가하거나 상태 변경시 합계 숫자 변경
 function changeSumNumber() {
-  let sumTodos = JSON.parse(localStorage.getItem("todos")).length;
-  spanSumTodos.innerHTML = sumTodos;
-  console.log(sumTodos)
+  if(localStorage.getItem("todos")){
+    sumTodos = JSON.parse(localStorage.getItem("todos")).length;
+    spanSumTodos.innerHTML = sumTodos;
+    console.log(sumTodos)
+  } else {
+    spanSumTodos.innerHTML = "0"
+  }
+  if(localStorage.getItem("todosDone")) {
+    sumTodosDone = JSON.parse(localStorage.getItem("todosDone")).length;
+    spanSumDone.innerHTML = sumTodosDone;
+  } else {
+    spanSumDone.innerHTML = "0";
+  }
 }
 
 function saveTodosDone() {
@@ -187,7 +200,7 @@ function onChangeCheckBox(event) {
     toDos = arr.filter(toDo => toDo.id !== parseInt(card.id));
     card.remove();
     toDosDone.push(toDoDone);
-    toDos.push(toDoDone);
+    toDos.push(toDos);
     saveTodosDone();
     saveTodos();
     //paintTodo();
