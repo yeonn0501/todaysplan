@@ -17,7 +17,6 @@ const spanSumDone = document.getElementById("spanSumDone");
 
 const todoItem = document.getElementById("todoItem");
 const row = document.getElementById("Row");
-const rowDone = document.getElementById("RowDone");
 let validate = false;
 
 
@@ -157,6 +156,7 @@ function deleteToDo() {
 function saveTodos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
   changeSumNumber();
+
 }
 
 // 할 일 추가하거나 상태 변경시 합계 숫자 변경
@@ -200,9 +200,10 @@ function onChangeCheckBox(event) {
     toDos = arr.filter(toDo => toDo.id !== parseInt(card.id));
     card.remove();
     toDosDone.push(toDoDone);
+    toDos.push(toDos);
     saveTodosDone();
-    //console.log(toDos)
     saveTodos();
+    //paintTodo();
   } else {
 
   }

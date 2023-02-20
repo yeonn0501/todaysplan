@@ -96,16 +96,20 @@
         <button type="button" class="btn btn-dark col-12 " id="toggleBtn" data-bs-toggle="collapse" data-bs-target="#formWrap"
           aria-expanded="true" aria-controls="formWrap"><i id="arrowIcon" class="text-white bi bi-chevron-up"></i></button>
         <div class="text-end mt-2">
-          <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck2">진행중(<span id="spanSumTodos"></span>)</label>
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btncheck1" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck1">진행중(<span id="spanSumTodos"></span>)</label>
 
-            <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btncheck3">완료(<span id="spanSumDone"></span>)</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btncheck2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck2">완료(<span id="spanSumDone"></span>)</label>
+            
+            <!-- <input type="radio" class="btn-check" name="btnradio" id="btncheck3" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btncheck3">전체(<span id="spanSumTotal"></span>)</label> -->
           </div>
         </div>
       </div>
     </div>
+    <div class="d-none" id="RowDone"></div>
   </div>
   <div id="todoItem" class="d-none todo-item col-12 col-xxl-3 col-xl-3 col-lg-4 col-md-4 col-sm-4">
     <div class="card">
