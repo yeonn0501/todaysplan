@@ -41,3 +41,16 @@ footer {
   font-family: 'AppleSDGothicNeoM';
 }
 
+/* 반응형 css */
+
+@media (max-width: 767px) {
+  .status-wrap {
+    text-align: right;
+  }
+}
+
+@media (min-width: 768px) {
+  .status-wrap {
+    text-align: center;
+  }
+}

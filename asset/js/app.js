@@ -14,12 +14,14 @@ const clearBtn = document.getElementById("clearBtn");
 const todoForm = document.getElementById("todoForm");
 const spanSumTodos = document.getElementById("spanSumTodos");
 const spanSumDone = document.getElementById("spanSumDone");
+const spanSumTotal = document.getElementById("spanSumTotal");
+const statusRadio = document.querySelectorAll("input[name='statusRadio']");
 
 const todoItem = document.getElementById("todoItem");
 const row = document.getElementById("Row");
 const rowDone = document.getElementById("RowDone");
 let validate = false;
-
+let statusRadioValue = false;
 
 const todoTitle = document.getElementById("todoTitle");
 const todoDesc = document.getElementById("todoDesc");
@@ -36,6 +38,7 @@ let minutes;
 let checkedId;
 let sumTodos;
 let sumTodosDone;
+let sumTodosTotal;
 title.focus();
 changeSumNumber();
 
@@ -174,6 +177,10 @@ function changeSumNumber() {
   } else {
     spanSumDone.innerHTML = "0";
   }
+  sumTodosTotal = sumTodos + sumTodosDone;
+  console.log(sumTodosTotal);
+  spanSumTotal.innerHTML = sumTodosTotal
+  
 }
 
 function saveTodosDone() {
@@ -237,7 +244,14 @@ if (savedTodosDone !== null) {
   //parsedToDosDone.forEach(paintTodoDone);
 }
 
-
+// 라디오버튼 클릭시 이벤트
+function getStatusValue(radioValue) {
+  statusRadioValue = radioValue;
+  if(statusRadioValue) {
+    
+  }
+}
+statusRadio.forEach(statusRadio => statusRadio.addEventListener('change', () => getStatusValue(statusRadio.value)));
 
 // items.addEventListener("dblclick", onDoubleClick);
 startTime.addEventListener("blur", onFocusOut);
