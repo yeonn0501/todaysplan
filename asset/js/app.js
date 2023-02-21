@@ -21,7 +21,6 @@ const todoItem = document.getElementById("todoItem");
 const row = document.getElementById("Row");
 const rowDone = document.getElementById("RowDone");
 let validate = false;
-let statusRadioValue = false;
 
 const todoTitle = document.getElementById("todoTitle");
 const todoDesc = document.getElementById("todoDesc");
@@ -194,6 +193,11 @@ function clearFormInput() {
   }
 }
 
+function paintTodoDone() {
+  console.log('paintTodoDone()');
+
+}
+
 // 체크버튼 클릭시 success true로 변경 후 달성 완료 처리
 function onChangeCheckBox(event) {
   const card = this.parentNode.parentNode.parentNode.parentNode;
@@ -246,9 +250,17 @@ if (savedTodosDone !== null) {
 
 // 라디오버튼 클릭시 이벤트
 function getStatusValue(radioValue) {
-  statusRadioValue = radioValue;
+  statusRadioValue = parseInt(radioValue);
+  console.log(statusRadioValue)
   if(statusRadioValue) {
-    
+    console.log("true")
+    console.log('true')
+    rowDone.classList.remove('d-none');
+    row.classList.add('d-none');
+  } else if(!statusRadioValue) {
+    console.log("false")
+    row.classList.remove('d-none');
+    rowDone.classList.add('d-none');
   }
 }
 statusRadio.forEach(statusRadio => statusRadio.addEventListener('change', () => getStatusValue(statusRadio.value)));

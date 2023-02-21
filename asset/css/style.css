@@ -25,7 +25,9 @@ footer {
   min-height: 100%;
   margin-bottom: 100px;
 }
-
+.collase-wrap{
+  margin-top: 30px;
+}
 .card:hover {
   border-color: #0d6dfe;
   transition: all ease-in-out .2s;
